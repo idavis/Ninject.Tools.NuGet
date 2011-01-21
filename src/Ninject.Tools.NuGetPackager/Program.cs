@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -28,17 +29,65 @@ namespace Ninject.Tools.NuGetPackager
 {
     public class Program
     {
-        private static readonly string NugetExePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "nuget.exe" );
         private const string DownLoadUrl =
                 @"http://teamcity.codebetter.com/guestAuth/repository/downloadAll/{0}/.lastSuccessful/artifacts.zip";
-        private static Dictionary<string, string> Urls = new Dictionary<string, string>
-                                                         {
-                                                                 {
-                                                                         "Ninject2",
-                                                                         @"bt243"
-                                                                         }
-                                                         };
 
+        private static string NinjectVersion;
+
+        private static readonly string SpecOutputPath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "Specs" );
+        private static readonly string NugetExePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "NuGet.exe" );
+
+        private static readonly Dictionary<string, string> Urls = new Dictionary<string, string>
+                                                                  {
+                                                                          { "Ninject2", @"bt243" },
+                                                                          {
+                                                                                  "Ninject.Extensions.bbvEventBroker",
+                                                                                  @"bt248"
+                                                                                  },
+                                                                          { "Ninject.Extensions.ChildKernel", @"bt244" },
+                                                                          {
+                                                                                  "Ninject.Extensions.Contextpreservation"
+                                                                                  ,
+                                                                                  @"bt245"
+                                                                                  },
+                                                                          { "Ninject.Extensions.Conventions", @"bt249" },
+                                                                          {
+                                                                                  "Ninject.Extensions.DependencyCreation"
+                                                                                  ,
+                                                                                  @"bt247"
+                                                                                  },
+                                                                          {
+                                                                                  "Ninject.Extensions.Interception",
+                                                                                  @"bt286"
+                                                                                  },
+                                                                          { "Ninject.Extensions.Logging", @"bt266" },
+                                                                          {
+                                                                                  "Ninject.Extensions.MessageBroker",
+                                                                                  @"bt279"
+                                                                                  },
+                                                                          { "Ninject.Extensions.NamedScope", @"bt246" },
+                                                                          { "Ninject.Extensions.Wcf", @"bt260" },
+                                                                          {
+                                                                                  "Ninject.Extensions.WeakEventMessageBroker"
+                                                                                  ,
+                                                                                  @"bt280"
+                                                                                  },
+                                                                          { "Ninject.Extensions.Wf", @"bt296" },
+                                                                          { "Ninject.Extensions.Xml", @"bt268" },
+                                                                          { "Ninject.MockingKernel", @"bt272" },
+                                                                          { "Ninject.Web", @"bt267" },
+                                                                          { "Ninject.Web.Mvc_1", @"bt252" },
+                                                                          { "Ninject.Web.Mvc_2", @"bt251" },
+                                                                          { "Ninject.Web.Mvc_3", @"bt293" },
+                                                                          {
+                                                                                  "Ninject.Web.Mvc.FluentValidation",
+                                                                                  @"bt270"
+                                                                                  },
+                                                                          { "Ninject1", @"bt4" },
+                                                                  };
+
+        private static bool _Download = true;
+        private static bool _Generate = true;
         static Program()
         {
             AppDomain.CurrentDomain.AssemblyResolve += Resolver;
@@ -58,53 +107,117 @@ namespace Ninject.Tools.NuGetPackager
 
         public static void Main( string[] args )
         {
-            try
+            if(args.Length == 1)
             {
-                foreach ( var url in Urls )
+                if(string.Equals(args[0], "download"))
                 {
-                    CreatePackage(string.Format(DownLoadUrl, url.Value));
+                    _Generate = false;
                 }
-
+                else if(string.Equals( args[0], "generate" ))
+                {
+                    _Download = false;
+                }
             }
-            catch ( Exception ex )
+            DeleteDirectory( SpecOutputPath );
+            CreateDirectory( SpecOutputPath );
+
+            string[] urlSegments = GetUrlSegments();
+
+            foreach ( string segment in urlSegments )
             {
-                Console.WriteLine( ex );
+                try
+                {
+                    CreatePackage( segment );
+                }
+                catch ( Exception ex )
+                {
+                    Console.WriteLine( ex );
+                }
             }
         }
 
-        private static void CreatePackage( string url )
+        private static string[] GetUrlSegments()
         {
-            string packageFilePath = DownloadArtifacts( url );
-            var packageFileInfo = new FileInfo(packageFilePath);
+            return Urls.Values.Cast<string>().ToArray();
+        }
+
+        private static void CreatePackage( string urlSegment )
+        {
+            string packageFilePath = null;
+            if(_Download)
+            {
+                packageFilePath = DownloadArtifacts( string.Format( DownLoadUrl, urlSegment ) );
+            }
+            else
+            {
+                var currentProject = Urls.Where( item => item.Value == urlSegment ).First();
+                var zipFiles = Directory.GetFiles( AppDomain.CurrentDomain.BaseDirectory, "*.zip" ).ToList();
+                packageFilePath =zipFiles
+                                .Where( file =>
+                                        file.ToUpperInvariant().Contains( currentProject.Key.ToUpperInvariant() ) )
+                                .FirstOrDefault();
+                if(string.IsNullOrEmpty( packageFilePath ))
+                {
+                    Console.WriteLine( "" );
+                }
+            }
+            if(!_Generate)
+            {
+                return;
+            }
+            if(packageFilePath.Contains( "MVC" ))
+            {
+                Console.WriteLine("");
+            }
+            var packageFileInfo = new FileInfo( packageFilePath );
             DirectoryInfo rootDirectory = packageFileInfo.Directory;
             string packageFile = packageFilePath.Trim();
-            string[] package = packageFilePath.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
-            string project = package[0].Replace(rootDirectory.FullName, string.Empty).Trim(new[] { '\\' });
+            string[] package = packageFilePath.Split( new[] { "_" }, StringSplitOptions.RemoveEmptyEntries );
+            string project = package[0].Replace( rootDirectory.FullName, string.Empty ).Trim( new[] { '\\' } );
             string product = package[1];
-            string version = package[2];
-            string specFile = (string.Equals(product, "Ninject2") ? "Ninject" : product) + ".nuspec";
+            string version;
+            if (string.Equals(product, "Ninject.Web.Mvc"))
+            {
+                product += package[2];
+                version = package[3];
+            }
+            else
+            {
+                version = package[2];
+            }
 
-            UnZip(rootDirectory, packageFile, product, project, version);
-            string specFilePath = UpdateSpecFile(rootDirectory, product, version, specFile);
-            string specOutputPath = Path.Combine( rootDirectory.FullName, "Specs" );
-            CreateNuPkg(specFilePath, specOutputPath);
+            if ( string.Equals( product, "Ninject2" ) )
+            {
+                NinjectVersion = version;
+            }
+
+            string specFile = ( string.Equals( product, "Ninject2" ) ? "Ninject" : product ) + ".nuspec";
+
+            UnZip( rootDirectory, packageFile, product, project, version );
+            string specFilePath = UpdateSpecFile( rootDirectory, product, version, specFile );
+
+            CreateNuPkg( specFilePath );
         }
 
-        private static void CreateNuPkg( string specFilePath, string specOutputPath )
+        private static void CreateNuPkg( string specFilePath )
         {
             // nuget pack xunit.nuspec –b c:\xunit  -o c:\xunit-nuget
-            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            var processStartInfo = new ProcessStartInfo();
             processStartInfo.CreateNoWindow = true;
             processStartInfo.FileName = NugetExePath;
             processStartInfo.Arguments = string.Format( "pack \"{0}\" -o \"{1}\"",
                                                         specFilePath,
-                                                        specOutputPath );
-            
+                                                        SpecOutputPath );
+
             processStartInfo.UseShellExecute = false;
             processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
 
-            var process = Process.Start( processStartInfo );
+            Process process = Process.Start( processStartInfo );
             process.WaitForExit();
+            string error = process.StandardError.ReadToEnd();
+            string info = process.StandardOutput.ReadToEnd();
+            Console.WriteLine( string.IsNullOrEmpty( error ) ? info : error );
         }
 
         private static string DownloadArtifacts( string url )
@@ -119,12 +232,14 @@ namespace Ninject.Tools.NuGetPackager
                     .Replace( "attachment; filename=", string.Empty );
             Console.WriteLine( fileName );
             string filePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, fileName );
+
+            if ( File.Exists( filePath ) )
+            {
+                File.Delete( filePath );
+            }
+
             using ( Stream responseStream = response.GetResponseStream() )
             {
-                if(File.Exists( filePath ))
-                {
-                    File.Delete( filePath );
-                }
                 using ( var fileStream = new FileStream( filePath, FileMode.Create ) )
                 {
                     CopyStream( responseStream, fileStream );
@@ -146,14 +261,28 @@ namespace Ninject.Tools.NuGetPackager
         public static void UnZip( DirectoryInfo root, string fileName, string product, string project, string version )
         {
             string outputFolder = Path.Combine( root.FullName, product, version, "lib" );
+            DeleteDirectory( outputFolder );
+            UnzipArtifactPackage( outputFolder, fileName );
+            UnzipArtifacts( product, version, outputFolder, project );
+        }
+
+        private static void DeleteDirectory( string outputFolder )
+        {
             if ( Directory.Exists( outputFolder ) )
             {
                 var directoryInfo = new DirectoryInfo( outputFolder );
                 directoryInfo.Attributes = directoryInfo.Attributes & ~FileAttributes.ReadOnly;
                 directoryInfo.Delete( true );
             }
-            UnzipArtifactPackage( outputFolder, fileName );
-            UnzipArtifacts( product, version, outputFolder, project );
+        }
+
+        private static void CreateDirectory( string outputFolder )
+        {
+            if ( Directory.Exists( outputFolder ) )
+            {
+                return;
+            }
+            Directory.CreateDirectory( outputFolder );
         }
 
         private static void UnzipArtifacts( string product, string version, string outputFolder, string project )
@@ -166,8 +295,8 @@ namespace Ninject.Tools.NuGetPackager
                     var fileInfo = new FileInfo( zipFile.Name );
                     string platform =
                             fileInfo.Name.Replace( product, string.Empty )
-                                    .Replace( version, string.Empty )
                                     .Replace( project, string.Empty )
+                                    .Replace( version, string.Empty )
                                     .Replace( "release", string.Empty )
                                     .Replace( ".zip", string.Empty )
                                     .Replace( "-no-web", "CP" )
@@ -206,25 +335,35 @@ namespace Ninject.Tools.NuGetPackager
             }
         }
 
-        private static string UpdateSpecFile(DirectoryInfo root, string product, string version, string specFile)
+        private static string UpdateSpecFile( DirectoryInfo root, string product, string version, string specFile )
         {
-            byte[] data = (byte[])typeof(Resources).GetProperty( specFile.Replace( ".nuspec", string.Empty ) ).GetValue( null, null );
-            string contents = Encoding.UTF8.GetString( data );
-            
-            string[] specFileContents =
-                    contents.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            for (int i = 0; i < specFileContents.Length; i++)
+            string id = specFile.Replace( ".nuspec", string.Empty ).Replace( ".", "_" );
+            PropertyInfo property = typeof (Resources).GetProperties().Where( propertyInfo=>propertyInfo.Name.ToUpperInvariant() == id.ToUpperInvariant() ).FirstOrDefault();
+            if ( property == null )
             {
-                if (specFileContents[i].Trim().StartsWith("<version>"))
+                Console.WriteLine( "Property was null..." );
+            }
+            var data = (byte[]) property.GetValue( null, null );
+            string contents = Encoding.UTF8.GetString( data );
+
+            string[] specFileContents =
+                    contents.Split( new[] { Environment.NewLine }, StringSplitOptions.None );
+            for ( int i = 0; i < specFileContents.Length; i++ )
+            {
+                if ( specFileContents[i].Trim().StartsWith( "<version>" ) )
                 {
-                    specFileContents[i] = string.Format("    <version>{0}</version>", version);
+                    specFileContents[i] = string.Format( "    <version>{0}</version>", version );
+                }
+                else if ( specFileContents[i].Trim().Contains( "{NinjectVersion}" ) )
+                {
+                    specFileContents[i] = specFileContents[i].Replace( "{NinjectVersion}", NinjectVersion );
                 }
             }
-            string outputSpecFile = Path.Combine(root.FullName,
+            string outputSpecFile = Path.Combine( root.FullName,
                                                   product,
                                                   version,
-                                                  specFile);
-            File.WriteAllText(outputSpecFile, string.Join(Environment.NewLine, specFileContents));
+                                                  specFile );
+            File.WriteAllText( outputSpecFile, string.Join( Environment.NewLine, specFileContents ) );
             return outputSpecFile;
         }
     }

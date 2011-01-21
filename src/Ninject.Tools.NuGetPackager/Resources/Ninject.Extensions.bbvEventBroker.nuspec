@@ -2,10 +2,10 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Ninject.Extensions.bbvEventBroker</id>
-    <version>Ninject extension which adds support for bbv.Common.EventBroker.</version>
+    <version></version>
     <authors>Remo Gloor</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Ninject extension which adds support for bbv.Common.EventBroker</description>
     <summary></summary>
     <language>en-US</language>
     <dependencies>
