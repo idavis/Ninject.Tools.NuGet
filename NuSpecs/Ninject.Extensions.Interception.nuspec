@@ -5,8 +5,11 @@
     <version></version>
     <authors>Nate Kohari,Ian Davis</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Interception extension for Ninject</description>
     <summary></summary>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="{NinjectVersion}" />
+    </dependencies> 
   </metadata>
 </package>

@@ -5,8 +5,11 @@
     <version></version>
     <authors>Remo Gloor</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Extension for Ninject used to create a dependency toghether with another object without having a reference to it</description>
     <summary></summary>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="{NinjectVersion}" />
+    </dependencies> 
   </metadata>
 </package>

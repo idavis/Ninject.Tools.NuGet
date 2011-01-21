@@ -5,8 +5,11 @@
     <version></version>
     <authors>Nate Kohari,Ian Davis</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Extension for Ninject providing integration with ASP.NET MVC2</description>
     <summary></summary>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="{NinjectVersion}" />
+    </dependencies> 
   </metadata>
 </package>

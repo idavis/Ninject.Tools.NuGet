@@ -5,8 +5,11 @@
     <version></version>
     <authors>Nate Kohari,Remo Gloor,Derick Bailey</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Extension for Ninject aiding testability in Moq and RhinoMocks</description>
     <summary></summary>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="{NinjectVersion}" />
+    </dependencies> 
   </metadata>
 </package>

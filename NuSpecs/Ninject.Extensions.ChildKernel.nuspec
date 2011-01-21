@@ -5,8 +5,11 @@
     <version></version>
     <authors>Remo Gloor</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Ninject extension that allows child kernels can be defined.</description>
     <summary></summary>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="{NinjectVersion}" />
+    </dependencies> 
   </metadata>
 </package>
