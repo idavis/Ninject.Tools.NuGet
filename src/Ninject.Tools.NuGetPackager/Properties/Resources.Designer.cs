@@ -66,5 +66,145 @@ namespace Ninject.Tools.NuGetPackager.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        public static byte[] Ninject_Extensions_bbvEventBroker {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_bbvEventBroker", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_ChildKernel {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_ChildKernel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_ContextPreservation {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_ContextPreservation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Conventions {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Conventions", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_DependencyCreation {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_DependencyCreation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Interception {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Interception", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Logging {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Logging", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_MessageBroker {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_MessageBroker", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_NamedScope {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_NamedScope", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Wcf {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Wcf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_WeakEventMessageBroker {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_WeakEventMessageBroker", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Wf {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Wf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Extensions_Xml {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Extensions_Xml", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_MockingKernel {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_MockingKernel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Web {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Web", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Web_Mvc_FluentValidation {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Web_Mvc_FluentValidation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Web_Mvc1 {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Web_Mvc1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Web_Mvc2 {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Web_Mvc2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject_Web_Mvc3 {
+            get {
+                object obj = ResourceManager.GetObject("Ninject_Web_Mvc3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] Ninject1 {
+            get {
+                object obj = ResourceManager.GetObject("Ninject1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

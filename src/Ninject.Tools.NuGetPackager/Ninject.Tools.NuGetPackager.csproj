@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -66,7 +67,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Resources\Ninject.Extensions.bbvEventBroker.nuspec" />
+    <None Include="Resources\Ninject.Extensions.ChildKernel.nuspec" />
+    <None Include="Resources\Ninject.Extensions.ContextPreservation.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Conventions.nuspec" />
+    <None Include="Resources\Ninject.Extensions.DependencyCreation.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Interception.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Logging.nuspec" />
+    <None Include="Resources\Ninject.Extensions.MessageBroker.nuspec" />
+    <None Include="Resources\Ninject.Extensions.NamedScope.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Wcf.nuspec" />
+    <None Include="Resources\Ninject.Extensions.WeakEventMessageBroker.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Wf.nuspec" />
+    <None Include="Resources\Ninject.Extensions.Xml.nuspec" />
+    <None Include="Resources\Ninject.MockingKernel.nuspec" />
     <None Include="Resources\Ninject.nuspec" />
+    <None Include="Resources\Ninject.Web.Mvc.FluentValidation.nuspec" />
+    <None Include="Resources\Ninject.Web.Mvc1.nuspec" />
+    <None Include="Resources\Ninject.Web.Mvc2.nuspec" />
+    <None Include="Resources\Ninject.Web.Mvc3.nuspec" />
+    <None Include="Resources\Ninject.Web.nuspec" />
+    <None Include="Resources\Ninject1.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\tools\NuGet\NuGet.Core.dll">

@@ -121,4 +121,64 @@
   <data name="Ninject" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ninject.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Ninject1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject1.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_bbvEventBroker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.bbvEventBroker.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_ChildKernel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.ChildKernel.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_ContextPreservation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.ContextPreservation.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Conventions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Conventions.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_DependencyCreation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.DependencyCreation.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Interception" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Interception.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Logging" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Logging.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_MessageBroker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.MessageBroker.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_NamedScope" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.NamedScope.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Wcf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Wcf.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_WeakEventMessageBroker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.WeakEventMessageBroker.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Wf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Wf.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Extensions_Xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Extensions.Xml.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_MockingKernel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.MockingKernel.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Web" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Web.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Web_Mvc1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Web.Mvc1.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Web_Mvc2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Web.Mvc2.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Web_Mvc3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Web.Mvc3.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ninject_Web_Mvc_FluentValidation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ninject.Web.Mvc.FluentValidation.nuspec;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
