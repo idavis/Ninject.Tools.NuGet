@@ -154,11 +154,12 @@ namespace Ninject.Tools.NuGetPackager
                 var zipFiles = Directory.GetFiles( AppDomain.CurrentDomain.BaseDirectory, "*.zip" ).ToList();
                 packageFilePath =zipFiles
                                 .Where( file =>
-                                        file.ToUpperInvariant().Contains( currentProject.Key.ToUpperInvariant() ) )
+                                        file.ToUpperInvariant().Contains( currentProject.Key.ToUpperInvariant() + "_" ) )
                                 .FirstOrDefault();
                 if(string.IsNullOrEmpty( packageFilePath ))
                 {
-                    Console.WriteLine( "" );
+                    throw new Exception(string.Format("Zip file not found for {0}:{1}.", currentProject.Key,
+                                                      currentProject.Value));
                 }
             }
             if(!_Generate)
@@ -266,14 +267,29 @@ namespace Ninject.Tools.NuGetPackager
             UnzipArtifacts( product, version, outputFolder, project );
         }
 
-        private static void DeleteDirectory( string outputFolder )
+        public static bool DeleteDirectory(string targetDir)
         {
-            if ( Directory.Exists( outputFolder ) )
+            if (!Directory.Exists(targetDir))
             {
-                var directoryInfo = new DirectoryInfo( outputFolder );
-                directoryInfo.Attributes = directoryInfo.Attributes & ~FileAttributes.ReadOnly;
-                directoryInfo.Delete( true );
+                return false;
             }
+
+            string[] files = Directory.GetFiles(targetDir);
+            string[] dirs = Directory.GetDirectories(targetDir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
+            }
+
+            Directory.Delete(targetDir, false);
+            return true;
         }
 
         private static void CreateDirectory( string outputFolder )
@@ -294,21 +310,34 @@ namespace Ninject.Tools.NuGetPackager
                 {
                     var fileInfo = new FileInfo( zipFile.Name );
                     string platform =
-                            fileInfo.Name.Replace( product, string.Empty )
-                                    .Replace( project, string.Empty )
-                                    .Replace( version, string.Empty )
-                                    .Replace( "release", string.Empty )
-                                    .Replace( ".zip", string.Empty )
-                                    .Replace( "-no-web", "CP" )
-                                    .Replace( "silverlight-", "SL" )
-                                    .Replace( "SL2.0", "SL2" )
-                                    .Replace( "3.0", "3" )
-                                    .Replace( "4.0", "4" )
-                                    .Trim( new[] { '-' } );
+                        fileInfo.Name.Replace(product, string.Empty)
+                            .Replace("Ninject.Extensions.ContextPreservation", string.Empty)
+                            .Replace("Ninject.Web.Mvc", string.Empty)
+                            .Replace(project, string.Empty)
+                            .Replace(version, string.Empty)
+                            .Replace("release", string.Empty)
+                            .Replace(".zip", string.Empty)
+                            .Replace("-no-web", "-client")
+                            .Replace("silverlight-", "SL")
+                            .Replace("SL2.0", "SL2")
+                            .Replace("3.0", "3")
+                            .Replace("4.0", "4")
+                            .Replace("2.0", "2")
+                            .Replace("net-4", ".NetFramework 4.0")
+                            .Replace("net-3.5", ".NetFramework 3.5")
+                            .Replace("net-2.0", ".NetFramework 2.0")
+                            .Trim(new[] {'-'});
+                    
+                    if(platform.Contains("mono") || platform.Contains("-client") || platform.Contains("cf"))
+                    {
+                        continue;
+                    }
                     string platformDir = Path.Combine( outputFolder, platform );
                     foreach ( ZipEntry zipEntry in zipFile )
                     {
                         zipEntry.Extract( platformDir, ExtractExistingFileAction.OverwriteSilently );
+                        var libPath = Path.Combine(platformDir, "lib");
+                        DeleteDirectory(libPath);
                     }
                 }
             }

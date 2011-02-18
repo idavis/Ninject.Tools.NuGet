@@ -2,10 +2,10 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Ninject.Web.Mvc.FluentValidation</id>
-    <version>Fluent validation extension for Ninject.Web.Mvc</version>
+    <version></version>
     <authors>Sean Chambers</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Fluent validation extension for Ninject.Web.Mvc</description>
     <summary></summary>
     <language>en-US</language>
     <dependencies>
