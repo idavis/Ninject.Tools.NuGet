@@ -85,7 +85,7 @@
     <None Include="Resources\Ninject.Web.Mvc.FluentValidation.nuspec" />
     <None Include="Resources\Ninject.Web.Mvc1.nuspec" />
     <None Include="Resources\Ninject.Web.Mvc2.nuspec" />
-    <None Include="Resources\Ninject.Web.Mvc3.nuspec" />
+    <None Include="Resources\Ninject.MVC3.nuspec" />
     <None Include="Resources\Ninject.Web.nuspec" />
     <None Include="Resources\Ninject1.nuspec" />
   </ItemGroup>
