@@ -3,8 +3,9 @@
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Ninject.Extensions.ContextPreservation</id>
     <version></version>
-    <authors>Nate Kohari,Ian Davis,Remo Gloor,Joe Wasson,Daniel Marbach</authors>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <authors>Ninject Project Contributors</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<licenseUrl>https://github.com/ninject/ninject.extensions.contextpreservation/raw/master/LICENSE.txt</licenseUrl>
     <description>Ninject extension that preserves the context over factories (the parent of the new request is the factory request)</description>
     <summary></summary>
     <language>en-US</language>
